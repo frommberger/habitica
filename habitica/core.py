@@ -163,11 +163,14 @@ def cl_item_count(task):
 
 
 def print_task_list(tasks):
+    sum = 0
     for i, task in enumerate(tasks):
+        sum = sum +  task['value']
         completed = 'x' if task['completed'] else ' '
-        task_line = '[%s] %s %s' % (completed,
+        task_line = '[%s] %s %s %s' % (completed,
                                     i + 1,
-                                    task['text'])
+                                    task['text'],
+                                    round(task['value'],1))
         checklist_available = cl_item_count(task) > 0
         if checklist_available:
             task_line += ' (%s/%s)' % (str(cl_done_count(task)),
@@ -178,6 +181,7 @@ def print_task_list(tasks):
                 completed = 'x' if check['completed'] else ' '
                 print('    [%s] %s' % (completed,
                                        check['text']))
+    print("Sum of task values: %s" % round(sum,1))
 
 
 def qualitative_task_score_from_value(value):
