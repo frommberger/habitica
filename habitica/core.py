@@ -175,13 +175,13 @@ def print_task_list(tasks):
         if checklist_available:
             task_line += ' (%s/%s)' % (str(cl_done_count(task)),
                                        str(cl_item_count(task)))
-        print(task_line)
+        print(task_line).encode('utf-8')
         if checklists_on and checklist_available:
             for c, check in enumerate(task['checklist']):
                 completed = 'x' if check['completed'] else ' '
                 print('    [%s] %s' % (completed,
                                        check['text']))
-    print("Sum of task values: %s" % round(sum,1))
+    print("Sum of task values: %s" % round(sum,1)).encode('utf-8')
 
 
 def qualitative_task_score_from_value(value):
