@@ -11,7 +11,6 @@ TODO:philadams add logging to .api
 TODO:philadams get logger named, like requests!
 """
 
-
 from bisect import bisect
 import json
 import logging
@@ -24,6 +23,7 @@ from docopt import docopt
 from . import api
 
 from pprint import pprint
+
 
 try:
     import ConfigParser as configparser
@@ -175,13 +175,13 @@ def print_task_list(tasks):
         if checklist_available:
             task_line += ' (%s/%s)' % (str(cl_done_count(task)),
                                        str(cl_item_count(task)))
-        print(task_line).encode('utf-8')
+        print(task_line)
         if checklists_on and checklist_available:
             for c, check in enumerate(task['checklist']):
                 completed = 'x' if check['completed'] else ' '
                 print('    [%s] %s' % (completed,
                                        check['text']))
-    print("Sum of task values: %s" % round(sum,1)).encode('utf-8')
+    print("Sum of task values: %s" % round(sum,1))
 
 
 def qualitative_task_score_from_value(value):
@@ -354,9 +354,9 @@ def cli():
 
         # prepare and print status strings
         title = 'Level %d %s' % (stats['lvl'], stats['class'].capitalize())
-        health = '%d/%d' % (stats['hp'], stats['maxHealth'])
-        xp = '%d/%d' % (int(stats['exp']), stats['toNextLevel'])
-        mana = '%d/%d' % (int(stats['mp']), stats['maxMP'])
+        health = '%.2f/%d' % (stats['hp'], stats['maxHealth'])
+        xp = '%.2f/%d' % (int(stats['exp']), stats['toNextLevel'])
+        mana = '%.2f/%d' % (int(stats['mp']), stats['maxMP'])
         currentPet = items.get('currentPet', '')
         if not currentPet:
             currentPet = DEFAULT_PET
